@@ -1,0 +1,437 @@
+.health-tools-page {
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+
+.health-tools-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.ht-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.ht-header h1 {
+    font-size: var(--font-3xl);
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.ht-header p {
+    color: var(--text-tertiary);
+    font-size: var(--font-sm);
+}
+
+/* Tool Tabs */
+.tool-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.tool-tab {
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: var(--font-xs);
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-base);
+}
+
+.tool-tab:hover {
+    border-color: rgba(0, 212, 170, 0.3);
+    color: var(--accent-primary);
+}
+
+.tool-tab.active {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+}
+
+/* Tool Card */
+.tool-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    animation: fade-in-up 0.3s ease;
+}
+
+.tool-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.tool-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.tool-icon.bmi { background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 212, 170, 0.05)); }
+.tool-icon.calorie { background: linear-gradient(135deg, rgba(255, 149, 0, 0.15), rgba(255, 149, 0, 0.05)); }
+.tool-icon.water { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(52, 152, 219, 0.05)); }
+.tool-icon.heart { background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(231, 76, 60, 0.05)); }
+
+.tool-card-header h2 {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.tool-card-header p {
+    font-size: var(--font-xs);
+    color: var(--text-tertiary);
+}
+
+/* Input Groups */
+.tool-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.input-group.full { grid-column: 1 / -1; }
+
+.input-group label {
+    display: block;
+    font-size: var(--font-xs);
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: var(--font-sm);
+    font-family: inherit;
+    transition: border-color var(--transition-base);
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-primary);
+    border: none;
+    color: white;
+    font-size: var(--font-sm);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px var(--accent-primary-glow);
+}
+
+/* Result Section */
+.result-section {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    animation: fade-in-up 0.4s ease;
+}
+
+/* BMI Gauge */
+.bmi-gauge-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.bmi-gauge {
+    position: relative;
+    width: 200px;
+    height: 110px;
+    overflow: hidden;
+}
+
+.gauge-bg {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+    display: flex;
+}
+
+.gauge-fill {
+    height: 100%;
+    flex: 1;
+}
+.gauge-fill.under { background: #3498db; }
+.gauge-fill.normal { background: #00D4AA; }
+.gauge-fill.over { background: #f39c12; }
+.gauge-fill.obese { background: #e74c3c; }
+
+.gauge-needle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    height: 80px;
+    background: var(--text-primary);
+    transform-origin: bottom center;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 3px;
+    margin-left: -1.5px;
+}
+
+.gauge-center {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: var(--bg-card);
+    padding: 6px 16px;
+    border-radius: var(--radius-md);
+}
+
+.gauge-value {
+    font-size: var(--font-2xl);
+    font-weight: 800;
+}
+
+.gauge-label {
+    font-size: var(--font-xs);
+    color: var(--text-tertiary);
+    font-weight: 600;
+}
+
+.bmi-categories {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.bmi-cat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-xs);
+    color: var(--text-tertiary);
+}
+
+.bmi-cat .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.result-advice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(0, 212, 170, 0.06);
+    border: 1px solid rgba(0, 212, 170, 0.15);
+    border-radius: var(--radius-md);
+    font-size: var(--font-xs);
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+/* Calorie Cards */
+.calorie-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.cal-card {
+    text-align: center;
+    padding: 16px 8px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.cal-card .cal-icon { font-size: 24px; margin-bottom: 6px; }
+.cal-card .cal-value { font-size: var(--font-xl); font-weight: 800; color: var(--text-primary); }
+.cal-card .cal-label { font-size: 10px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+.cal-card.maintain .cal-value { color: var(--accent-primary); }
+.cal-card.lose .cal-value { color: #3498db; }
+.cal-card.gain .cal-value { color: #f39c12; }
+
+.macro-split h4 {
+    font-size: var(--font-sm);
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.macro-bars { display: flex; flex-direction: column; gap: 12px; }
+
+.macro-bar .macro-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-xs);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.macro-name { color: var(--text-secondary); }
+
+.bar-bg {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+
+.bar-fill.protein { background: linear-gradient(90deg, #e74c3c, #ff6b6b); }
+.bar-fill.carbs { background: linear-gradient(90deg, #f39c12, #ffc107); }
+.bar-fill.fat { background: linear-gradient(90deg, #00D4AA, #6C5CE7); }
+
+/* Water Intake */
+.water-result {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.water-visual { flex-shrink: 0; }
+
+.water-bottle {
+    width: 80px;
+    height: 160px;
+    border: 3px solid rgba(52, 152, 219, 0.3);
+    border-radius: 8px 8px 20px 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.water-level {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(52, 152, 219, 0.6), rgba(52, 152, 219, 0.3));
+    border-radius: 0 0 17px 17px;
+    transition: height 0.8s ease;
+    position: absolute;
+    bottom: 0;
+}
+
+.water-amount {
+    position: relative;
+    z-index: 1;
+    font-size: var(--font-xl);
+    font-weight: 800;
+    color: var(--text-primary);
+    padding-bottom: 20px;
+}
+
+.water-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+}
+
+.water-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.ws-icon { font-size: 24px; }
+.water-stat strong { display: block; font-size: var(--font-sm); color: var(--text-primary); }
+.water-stat span { font-size: 11px; color: var(--text-muted); }
+
+/* Heart Rate Zones */
+.hr-max {
+    text-align: center;
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    padding: 12px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.hr-max strong { color: #e74c3c; font-size: var(--font-lg); }
+
+.hr-zones { display: flex; flex-direction: column; gap: 10px; }
+
+.hr-zone {
+    padding: 14px 16px;
+    border-left: 4px solid;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: var(--bg-secondary);
+}
+
+.zone-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.zone-name { font-weight: 700; font-size: var(--font-sm); }
+.zone-pct { font-size: var(--font-xs); color: var(--text-muted); font-weight: 600; }
+.zone-range { font-size: var(--font-xs); font-weight: 700; color: var(--text-primary); }
+.zone-desc { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+.zone-bar-bg {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--bg-tertiary);
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.zone-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tool-inputs { grid-template-columns: 1fr; }
+    .calorie-cards { grid-template-columns: repeat(2, 1fr); }
+    .water-result { flex-direction: column; align-items: center; }
+    .tool-card { padding: 20px; }
+}

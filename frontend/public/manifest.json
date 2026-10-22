@@ -1,0 +1,21 @@
+{
+    "name": "HealSmart AI",
+    "short_name": "HealSmart",
+    "description": "AI-powered health assistant — consult AI doctors, book appointments, order medicines, and track your health.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0f",
+    "theme_color": "#00D4AA",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["health", "medical", "lifestyle"],
+    "lang": "en",
+    "scope": "/"
+}
